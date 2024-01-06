@@ -3,18 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="icon.png">
   <title>Chat App</title>
   <style>
     body {
       margin: 0;
       font-family: 'Arial', sans-serif;
-      background-color: #f2f2f2;
+      /* background-color: #0879a5f6; */
+      background-image: url(whatsapp.jpg);
     }
 
     #chat-container {
       max-width: 600px;
       margin: 20px auto;
       background-color: #fff;
+      /* background-image: url(peakpx.jpg); */
       padding: 20px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       border-radius: 8px;
@@ -42,7 +45,7 @@
 
     #send-button {
       padding: 10px;
-      background-color: #4caf50;
+      background-color: #1aadb8;
       color: #fff;
       border: none;
       border-radius: 4px;
@@ -50,7 +53,7 @@
     }
 
     #send-button:hover {
-      background-color: #45a049;
+      background-color: #2f8fbbea;
     }
 
     .join-message {
@@ -66,8 +69,12 @@
 </head>
 <body>
     <!-- This website is coded by Tanmay Tiwari/Silent Programmer -->
-    <center><img src="consultation.gif" alt="" height="512px"></center>
+    <br><br><br><br><br><br><br><br><br>
   <div id="chat-container">
+    <br><br><br><br><br><br>
+    <center><img src="icon.png" alt="" height="256px"></center>
+    <br><br><br><br><br><br>
+    
     <ul id="messages"></ul>
     <div style="display: flex; align-items: center;">
       <input id="message-input" autocomplete="off" placeholder="Type your message..." />
@@ -99,6 +106,12 @@
 
       li.textContent = `${data.user}: ${data.message}`;
       messages.appendChild(li);
+
+      // Check if the page is not focused
+      if (!document.hasFocus()) {
+        // Send a notification if the page is not focused
+        notifyNewMessage(data.user, data.message);
+      }
     });
 
     function sendMessage() {
@@ -106,6 +119,27 @@
       const message = input.value;
       input.value = '';
       socket.emit('chatMessage', message);
+    }
+
+    function notifyNewMessage(user, message) {
+      if (Notification.permission === 'granted') {
+        const notification = new Notification(`${user} sent a message`, {
+          body: message,
+          icon: 'notification-icon.png', // You can customize the notification icon
+        });
+
+        // Automatically close the notification after a few seconds
+        setTimeout(() => {
+          notification.close();
+        }, 5000);
+      } else if (Notification.permission !== 'denied') {
+        // Ask for permission if not granted or denied
+        Notification.requestPermission().then((permission) => {
+          if (permission === 'granted') {
+            notifyNewMessage(user, message);
+          }
+        });
+      }
     }
   </script>
 </body>
