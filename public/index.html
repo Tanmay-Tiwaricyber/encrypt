@@ -14,12 +14,16 @@
       margin: 0;
       font-family: 'Arial', sans-serif;
       /* background-color: #0879a5f6; */
-      background-image: url(bg.jpg);
+
+      /* background-image: url(bg.jpg); */
+      background: rgb(63,94,251);
+      background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
       justify-content: center;
       align-items: center;
     }
 
     #chat-container {
+      box-shadow: #272525b5 2px 2px 37px 5px;
       max-width: 600px;
       margin: 20px auto;
       background-color: #ffffff42;
@@ -27,7 +31,7 @@
       flex-direction: column;
       /* background-image: url(peakpx.jpg); */
       padding: 20px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
       border-radius: 8px;
     }
 
@@ -48,6 +52,7 @@
       width: 70%;
       padding: 10px;
       border: 1px solid #ccc;
+      background-color: #ffffff42;
       border-radius: 4px;
       margin-right: 10px;
       width: calc(100% - 20px); /* Adjust the width based on your preference */
@@ -100,6 +105,8 @@
 
       #message-input {
         width: 100%;
+        background-color: #ffffff0f;
+
       }
       #send-button,
       #delete-button {
@@ -146,9 +153,9 @@
 
   <div id="chat-container">
     <br><br><br><br>
-    <center><img src="icon.png" alt="" height="200px"></center>
-    <center><h1 style="font-family: 'Foldit', sans-serif, 'Nabla', system-ui; font-size: 40px;">Conversify</h1></center>
-    <br><br><br>
+    <center><img src="icon.png" alt="" height="256px"></center>
+    <center><h1 style="font-family: 'Foldit', sans-serif, 'Nabla', system-ui; font-size: 50px;">Conversify</h1></center>
+    <br><br><br><br>
 
     <ul id="messages"></ul>
     <div style="display: flex; align-items: center;">
@@ -254,5 +261,6 @@ function deleteChat() {
   document.getElementById('profile-name').textContent = username;
   document.getElementById('profile-image').src = 'user-dp.png'; // Replace with the actual profile picture URL
 </script>
+<script src="/firebaseConfig.js"></script>
 </body>
 </html>
